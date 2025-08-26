@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Param • Portfolio</title>
+  <meta name="color-scheme" content="light dark">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --fg: #0b0b0c;
+      --muted: #6b7280;
+      --card: #f7f7f8;
+      --line: #e5e7eb;
+      --accent: #0a84ff; /* macOS/iOS system blue */
+      --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06);
+      --radius: 20px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0b0b0c;
+        --fg: #f5f7fa;
+        --muted: #9aa3b2;
+        --card: #141416;
+        --line: #24262a;
+        --shadow: 0 1px 1px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+      }
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Segoe UI, Roboto, Helvetica, Arial, system-ui, sans-serif;
+      letter-spacing:.01em; background:var(--bg); color:var(--fg);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .container{ max-width: 1024px; margin: 0 auto; padding: 28px clamp(16px, 4vw, 32px); }
+    .nav{ display:flex; gap:16px; align-items:center; justify-content:space-between; }
+    .nav a{ color: var(--fg); text-decoration:none; opacity:.8; padding:.4rem .6rem; border-radius:12px; }
+    .nav a:hover{ background: var(--card); opacity:1 }
+
+    .hero{ display:grid; grid-template-columns: 120px 1fr; gap:24px; align-items:center; padding: clamp(12px, 4vw, 28px) 0 10px; }
+    .avatar{
+      width:120px; height:120px; border-radius:50%; background:linear-gradient(135deg,#dfe7ff,#f6f2ff);
+      display:grid; place-items:center; box-shadow: var(--shadow); overflow:hidden;
+    }
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .avatar .initials{ font-weight:700; font-size:34px; color:#334155; }
+
+    h1{ font-size: clamp(28px, 4.2vw, 44px); line-height:1.06; margin:0; letter-spacing:-.02em; }
+    .sub{ margin:.5rem 0 0; color: var(--muted); font-size: clamp(14px, 1.6vw, 16px) }
+
+    .btnrow{ display:flex; gap:12px; margin-top:16px; flex-wrap:wrap }
+    .btn{ border:1px solid var(--line); background: var(--bg); color: var(--fg); padding:.7rem 1rem; border-radius:14px; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+    .btn:hover{ transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,.12) }
+    .btn.primary{ background: var(--fg); color: var(--bg); border-color: transparent; }
+    .btn.primary:hover{ transform: translateY(-2px); filter: brightness(1.05); }
+
+    .section{ margin-top: 34px; border-top:1px solid var(--line); padding-top: 24px; }
+    .section h2{ font-size: clamp(18px, 2.4vw, 22px); letter-spacing:-.01em; margin:0 0 16px; }
+
+    .grid{ display:grid; gap:16px; grid-template-columns: repeat(1, minmax(0,1fr)); }
+    @media (min-width:720px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    .card{ background: var(--card); border:1px solid var(--line); border-radius: var(--radius); padding:18px; box-shadow: var(--shadow); transition: transform .25s ease; }
+    .card:hover{ transform: translateY(-3px); }
+    .card h3{ margin:0 0 6px; font-size:18px; letter-spacing:-.01em }
+    .muted{ color: var(--muted); margin:0 0 10px; font-size:14px }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap }
+    .tag{ font-size:12px; padding:.35rem .6rem; border-radius:999px; border:1px solid var(--line); background: rgba(10,132,255,.08); }
+
+    .skills{ display:grid; gap:10px; }
+    .skill{ display:grid; gap:6px; }
+    .bar{ height:8px; background: var(--line); border-radius:999px; overflow:hidden; }
+    .bar > i{ display:block; height:100%; width: var(--val, 70%); background: linear-gradient(90deg, var(--accent), #8ec5ff); }
+
+    footer{ padding: 36px 0 54px; color:var(--muted); font-size:14px }
+    .icon{ width:18px; height:18px; display:inline-block; vertical-align:-4px }
+
+    /* Subtle entrance animation */
+    [data-animate]{ opacity:0; transform: translateY(8px); animation: fadeup .5s ease forwards; }
+    [data-animate].d1{ animation-delay:.05s } [data-animate].d2{ animation-delay:.1s } [data-animate].d3{ animation-delay:.15s }
+    @keyframes fadeup{ to{ opacity:1; transform:none } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- NAV -->
+    <nav class="nav" aria-label="Primary">
+      <strong>PROFILE</strong>
+      <div>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="avatar" aria-label="Profile photo">
+         <img src="/profile image.jpg" alt="Param" /> 
+        <span class="initials">PR</span>
+      </div>
+      <div>
+        <h1 data-animate>Param Verma <br> B.Tech CSE (AI & DS)</h1>
+        <p class="sub" data-animate> detail-oriented B.Tech student specializing in Computer Science and Engineering with a focus on
+<b>Artificial Intelligence and Data Science.</b>
+Equipped with strong analytical skills, proficiency in programming languages, data analysis, and software
+development.
+Seeking an entry-level position to leverage academic knowledge and technical expertise in contributing to
+innovative projects and driving technological advancements within a dynamic organization.</p>
+        <div class="btnrow" data-animate>
+          <a class="btn primary" href="Resume.pdf" download>Download Résumé</a>
+          <a class="btn" href="paramverma26soni@gmail.com">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            Email
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/param-verma-3000abc/" target="_blank" rel="noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0zM8 8h4.8v2.2h.07c.67-1.27 2.3-2.6 4.73-2.6 5.05 0 5.98 3.33 5.98 7.67V24h-5v-7.4c0-1.77-.03-4.05-2.47-4.05-2.47 0-2.85 1.93-2.85 3.92V24H8z"/></svg>
+            LinkedIn
+          </a>
+    
+        </div>
+      </div>
+    </header>
+
+  
+
+<!-- PROJECTS -->
+ <article class="card" data-animate class="d1"></article>
+<section id="projects" class="section">
+<h2>Projects</h2>
+<div class="grid">
+<article class="card" data-animate class="d1">
+ <h3><a href="codewellsolutions.work.gd" target="_blank">Codewell solutions Project</a></h3>
+<p class="muted">I have also built the official website for CodeWell Solutions,  where I worked on creating a dynamic and responsive design and bakcend with the dynamic integration of responses professionaly</p>
+<div class="tags">
+<span class="tag">html</span>
+<span class="tag">css</span>
+<span class="tag">js</span>
+</div>
+</article>
+<article class="card" data-animate class="d1">
+ <h3><a href="https://issarboilers.netlify.app/" target="_blank">Business showcase site</a></h3>
+<p class="muted">Designed and developed a responsive, dynamic website for a boiler manufacturing firm .</p>
+<div class="tags">
+<span class="tag">html</span>
+<span class="tag">css</span>
+<span class="tag">js</span>
+</div>
+</article>
+<article class="card" data-animate class="d2">
+<h3>Weather Forecasting ( Real-Time )</h3>
+<p class="muted">Developed a dynamic Weather Forecasting Application with real-time API integration, enabling users to access accurate and up-to-date weather information for any location. Implemented features include current weather conditions, temperature, humidity, wind speed, and a multi-day forecast, all presented through a responsive and user-friendly interface..</p>
+<span class="tag">html</span>
+<span class="tag">CSS</span>
+<span class="tag">API</span>
+<div class="tags">
+</div>
+</article>
+<article class="card" data-animate class="d3">
+<h3>Breast Cancer Detection Analysis system</h3>
+<p class="muted">Developed a Breast Cancer Detection Analysis system using regression techniques and medical dataset analysis. The project involves preprocessing patient data, applying statistical and regression models to predict the likelihood of breast cancer, and visualizing results for better interpretation and decision-making. Achieved accurate predictive insights to support early diagnosis.</p>
+<div class="tags">
+<span class="tag">Python / Numpy</span>
+<span class="tag">Regression</span>
+<span class="tag">Wiscoin dataset</span>
+<span class="tag">jupiter notebook</span>
+<span class="tag">Scikit-learn</span>
+</div>
+</article>
+</div>
+</section>
+
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+<h2>Skills</h2>
+<div class="skills">
+<div class="skill"><div class="muted">SQL </div><div class="bar"><i style="--val:80%"></i></div></div>
+<div class="skill"><div class="muted">HTML,C , C++</div><div class="bar"><i style="--val:85%"></i></div></div>
+<div class="skill"><div class="muted">Java / JS</div><div class="bar"><i style="--val:70%"></i></div></div>
+<div class="skill"><div class="muted">Oracle DB</div><div class="bar"><i style="--val:60%"></i></div></div>
+<div class="skill"><div class="muted">Data Visualization</div><div class="bar"><i style="--val:75%"></i></div></div>
+</div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+<h2>Contact</h2>
+<div class="grid">
+<div class="card" data-animate>
+<p style="margin:0 0 10px">Email</p>
+<a class="btn" href="mailto:paramverma26soni@gmail.com">paramverma26soni@gmail.com</a>
+</div>
+<div class="card" data-animate>
+<p style="margin:0 0 10px">Links</p>
+<div class="btnrow">
+<a class="btn" href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+<a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+<a class="btn" href="#" target="_blank" rel="noreferrer">Resume (PDF)</a>
+</div>
+</div>
+</div>
+</section>
+
+
+<footer>
+© <span id="year"></span> Param. Built with care.
+</footer>
+</div>
+
+
+<script>
+// year + animate on load
+document.getElementById('year').textContent = new Date().getFullYear();
+const els = document.querySelectorAll('[data-animate]');
+els.forEach((el,i)=>{ el.style.animationDelay = (i*60)+'ms'; });
+</script>
+</body>
+</html>
